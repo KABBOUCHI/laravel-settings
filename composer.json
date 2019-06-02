@@ -1,6 +1,6 @@
 {
     "name": "kabbouchi/laravel-settings",
-    "description": ":package_description",
+    "description": "Advanced Settings Manager for Laravel",
     "keywords": [
         "kabbouchi",
         "laravel-settings",
