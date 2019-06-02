@@ -1,0 +1,53 @@
+{
+    "name": "kabbouchi/laravel-settings",
+    "description": ":package_description",
+    "keywords": [
+        "kabbouchi",
+        "laravel-settings",
+        "settings"
+    ],
+    "homepage": "https://github.com/kabbouchi/laravel-settings",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Georges KABBOUCHI",
+            "email": "georges.kabbouchi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "spatie/laravel-translatable": "^4.1",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "KABBOUCHI\\Settings\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KABBOUCHI\\Settings\\Tests\\": "tests"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KABBOUCHI\\Settings\\SettingsServiceProvider"
+            ],
+            "aliases": {
+                "Settings": "KABBOUCHI\\Settings\\SkeletonFacade"
+            }
+        }
+    }
+}
