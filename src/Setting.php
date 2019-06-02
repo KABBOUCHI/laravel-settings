@@ -1,27 +1,29 @@
-<?php namespace KABBOUCHI\Settings;
+<?php
+
+namespace KABBOUCHI\Settings;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Setting extends Model
 {
-	use HasTranslations;
+    use HasTranslations;
 
-	public $translatable = ['value'];
+    public $translatable = ['value'];
 
-	protected $guarded = [];
+    protected $guarded = [];
 
-	protected $casts = [
-		'meta' => 'array'
-	];
+    protected $casts = [
+        'meta' => 'array',
+    ];
 
-	public static function byFullKey($key)
-	{
-		return self::where('full_key', $key)->first();
-	}
+    public static function byFullKey($key)
+    {
+        return self::where('full_key', $key)->first();
+    }
 
-	protected function asJson($value)
-	{
-		return json_encode($value, JSON_UNESCAPED_UNICODE);
-	}
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
 }

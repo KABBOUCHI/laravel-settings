@@ -9,54 +9,52 @@ use KABBOUCHI\Settings\Http\Controllers\SettingsController;
 
 class SettingsServiceProvider extends ServiceProvider
 {
-	/**
-	 * Bootstrap the application services.
-	 */
-	public function boot()
-	{
-		if ($this->app->runningInConsole()) {
+    /**
+     * Bootstrap the application services.
+     */
+    public function boot()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->registerMigrations();
 
-			$this->registerMigrations();
+            $this->publishes([
+                __DIR__.'/../config/config.php' => config_path('laravel-settings.php'),
+            ], 'config');
 
-			$this->publishes([
-				__DIR__ . '/../config/config.php' => config_path('laravel-settings.php'),
-			], 'config');
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations'),
+            ], 'laravel-settings-migrations');
 
-			$this->publishes([
-				__DIR__ . '/../database/migrations' => database_path('migrations'),
-			], 'laravel-settings-migrations');
+            $this->publishes([
+                __DIR__.'/../resources/js/components' => base_path('resources/js/components/laravel-settings'),
+            ], 'laravel-settings-components');
+        }
+    }
 
-			$this->publishes([
-				__DIR__ . '/../resources/js/components' => base_path('resources/js/components/laravel-settings'),
-			], 'laravel-settings-components');
-		}
+    /**
+     * Register Passport's migration files.
+     *
+     * @return void
+     */
+    protected function registerMigrations()
+    {
+        if (Settings::$runsMigrations) {
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        }
+    }
 
-	}
+    /**
+     * Register the application services.
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-settings');
 
-	/**
-	 * Register Passport's migration files.
-	 *
-	 * @return void
-	 */
-	protected function registerMigrations()
-	{
-		if (Settings::$runsMigrations) {
-			$this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-		}
-	}
+        /** @var Router $router */
+        $router = $this->app['router'];
 
-	/**
-	 * Register the application services.
-	 */
-	public function register()
-	{
-		$this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'laravel-settings');
-
-		/** @var Router $router */
-		$router = $this->app['router'];
-
-		$router->get('api/laravel-settings/groups', [GroupsController::class, 'index']);
-		$router->get('api/laravel-settings/groups/{group}', [GroupsController::class, 'show']);
-		$router->post('api/laravel-settings/settings/{key}', [SettingsController::class, 'update']);
-	}
+        $router->get('api/laravel-settings/groups', [GroupsController::class, 'index']);
+        $router->get('api/laravel-settings/groups/{group}', [GroupsController::class, 'show']);
+        $router->post('api/laravel-settings/settings/{key}', [SettingsController::class, 'update']);
+    }
 }
