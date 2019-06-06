@@ -13,13 +13,12 @@ class MultiSelect extends Field
 
     protected $translatable = false;
 
+    public function options(array $options)
+    {
+        $this->withMeta([
+            'options' => $options,
+        ]);
 
-	public function options(array $options)
-	{
-		$this->withMeta([
-			'options' => $options
-		]);
-
-		return $this;
-	}
+        return $this;
+    }
 }
