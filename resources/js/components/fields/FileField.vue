@@ -1,5 +1,7 @@
 <template>
     <div class="form-group mb-4">
+
+        asdasd
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center" style="flex:1">
                 <h4 class="mr-2">
@@ -32,9 +34,9 @@
             {{ field.meta.helpText }}
         </p>
         <div class="d-flex">
-            <input type="file" class="form-control" v-model="value[activeLang]">
+            <input type="file" class="form-control" style="max-height : 100%"
+                   @change="(e) => this.value[this.activeLang] = e.target.files[0]">
         </div>
-
 
     </div>
 </template>
@@ -45,16 +47,15 @@
         name: "FileField",
         data() {
             return {
-                value: this.field.value || {},
+                value: {},
                 meta: this.field.meta || {},
                 activeLang: 'en',
             }
         },
         created() {
-            if (this.field.value && this.field.value.length !== 0) {
-                this.value = this.field.value;
-            } else {
-                this.value = {}
+
+            this.value = {
+                en: null
             }
 
         },
@@ -63,8 +64,13 @@
                 save() {
 
                     let data = new FormData();
-                    data.set('meta', this.meta);
-                    data.set('value', this.value);
+                    data.append('meta', this.meta);
+
+                    console.log(this.value['en']);
+
+                    for (let lang in this.value)
+                        if (this.value[lang])
+                            data.set(`value[${lang}]`, this.value[lang]);
 
                     axios.post('/api/laravel-settings/settings/' + this.field.full_key, data)
                 }

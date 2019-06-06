@@ -41,7 +41,7 @@
 <script>
     export default {
         props: ['field', 'languages'],
-        name: "TextField",
+        name: "TextAreaField",
         data() {
             return {
                 value: this.field.value || {},

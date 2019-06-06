@@ -2,6 +2,9 @@
 
 namespace KABBOUCHI\Settings\Fields;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+
 class File extends Field
 {
     /**
@@ -33,12 +36,11 @@ class File extends Field
 
     public function meta()
     {
-        return array_merge([
-        ], $this->meta);
+        return array_merge([], $this->meta);
     }
 
-    public function store()
+    public function store(UploadedFile $file)
     {
-        return request()->file('attachment')->store($this->storagePath, $this->disk);
+        return $file->store($this->storagePath, $this->disk);
     }
 }
