@@ -3,7 +3,6 @@
 namespace KABBOUCHI\Settings;
 
 use Illuminate\Database\Eloquent\Model;
-use KABBOUCHI\Settings\Fields\Group;
 use Spatie\Translatable\HasTranslations;
 
 class Setting extends Model
@@ -23,7 +22,7 @@ class Setting extends Model
         return self::where('full_key', $key)->first();
     }
 
-	protected function asJson($value)
+    protected function asJson($value)
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
     }

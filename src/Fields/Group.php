@@ -84,10 +84,10 @@ class Group implements JsonSerializable
         return $this->key;
     }
 
-	public function fields()
-	{
-		return $this->fields;
-	}
+    public function fields()
+    {
+        return $this->fields;
+    }
 
     public function resolveFields()
     {

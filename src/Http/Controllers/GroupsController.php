@@ -5,7 +5,6 @@ namespace KABBOUCHI\Settings\Http\Controllers;
 use Illuminate\Http\Request;
 use KABBOUCHI\Settings\Settings;
 use Illuminate\Routing\Controller;
-use KABBOUCHI\Settings\Fields\Group;
 
 class GroupsController extends controller
 {
