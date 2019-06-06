@@ -42,7 +42,7 @@
 <script>
     export default {
         props: ['field', 'languages'],
-        name: "TextField",
+        name: "CheckboxField",
         data() {
             return {
                 value: this.field.value || {},

@@ -44,7 +44,7 @@
 <script>
     export default {
         props: ['field', 'languages'],
-        name: "TextField",
+        name: "MultiSelectField",
         data() {
             return {
                 value: this.field.value || {},

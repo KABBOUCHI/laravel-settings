@@ -2,16 +2,36 @@
 
 namespace KABBOUCHI\Settings\Http\Controllers;
 
-use KABBOUCHI\Settings\Setting;
 use Illuminate\Routing\Controller;
+use KABBOUCHI\Settings\Fields\File;
+use KABBOUCHI\Settings\Setting;
+use KABBOUCHI\Settings\Settings;
 
 class SettingsController extends controller
 {
-    public function update($key)
-    {
-        /** @var Setting $setting */
-        $setting = Setting::byFullKey($key);
+	public function update($key)
+	{
+		/** @var Setting $setting */
+		$setting = Setting::byFullKey($key);
 
-        return tap($setting)->update(request()->only(['value', 'meta']));
-    }
+		$field = Settings::getField($key);
+
+		$data = request()->validate([
+			$field->translatable() ? 'value.*' : 'value.en' => $field->rules,
+			'meta'                                          => []
+		], [
+
+		], [
+			'value.en' => $field->name
+		]);
+
+		if ($field instanceof File) {
+			/** @var File $field */
+
+			$data['value'] = $field->store();
+			$data['meta']['disk'] = $field->disk;
+		}
+
+		return tap($setting)->update($data);
+	}
 }

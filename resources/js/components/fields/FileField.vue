@@ -32,9 +32,7 @@
             {{ field.meta.helpText }}
         </p>
         <div class="d-flex">
-            <select class="form-control" v-model="value[activeLang]">
-                <option :value="key" v-for="(label, key )  in field.meta.options">{{ label}}</option>
-            </select>
+            <input type="file" class="form-control" v-model="value[activeLang]">
         </div>
 
 
@@ -44,10 +42,11 @@
 <script>
     export default {
         props: ['field', 'languages'],
-        name: "SelectField",
+        name: "FileField",
         data() {
             return {
                 value: this.field.value || {},
+                meta: this.field.meta || {},
                 activeLang: 'en',
             }
         },
@@ -62,10 +61,12 @@
         methods:
             {
                 save() {
-                    axios.post('/api/laravel-settings/settings/' + this.field.full_key, {
-                        value: this.value,
-                        meta: this.meta
-                    })
+
+                    let data = new FormData();
+                    data.set('meta', this.meta);
+                    data.set('value', this.value);
+
+                    axios.post('/api/laravel-settings/settings/' + this.field.full_key, data)
                 }
             }
     }

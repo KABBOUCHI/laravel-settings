@@ -22,15 +22,8 @@ class GroupsController extends controller
 
     public function show($group, Request $request)
     {
-        $groups = call_user_func(Settings::$fieldsCallback, $request);
-
-        /** @var Group $desiredGroup */
-        $desiredGroup = collect($groups)->first(function (Group $g) use ($group) {
-            return $g->id() === $group;
-        });
-
         return response(
-            $desiredGroup->resolveFields()
+            Settings::getGroup($group)->resolveFields()
         );
     }
 }
