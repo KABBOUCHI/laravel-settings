@@ -2,11 +2,11 @@
 
 namespace KABBOUCHI\Settings\Http\Controllers;
 
-use Illuminate\Routing\Controller;
-use KABBOUCHI\Settings\Fields\File;
 use KABBOUCHI\Settings\Setting;
 use KABBOUCHI\Settings\Settings;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Routing\Controller;
+use KABBOUCHI\Settings\Fields\File;
 
 class SettingsController extends controller
 {
@@ -25,7 +25,7 @@ class SettingsController extends controller
         ]);
 
         if ($field instanceof File) {
-            if (!request()->hasFile('value')) {
+            if (! request()->hasFile('value')) {
                 return $setting;
             }
 
