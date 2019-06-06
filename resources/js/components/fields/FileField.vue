@@ -1,7 +1,5 @@
 <template>
     <div class="form-group mb-4">
-
-        asdasd
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center" style="flex:1">
                 <h4 class="mr-2">
