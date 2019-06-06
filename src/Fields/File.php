@@ -3,7 +3,6 @@
 namespace KABBOUCHI\Settings\Fields;
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class File extends Field
 {
