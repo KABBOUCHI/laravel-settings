@@ -12,7 +12,7 @@ class GroupsController extends controller
     {
         $groups = call_user_func(Settings::$fieldsCallback, $request);
         $languages = call_user_func(Settings::$languages ?? function () {
-            return ["en" => "English"];
+            return ['en' => 'English'];
         }, $request);
 
         return response([
