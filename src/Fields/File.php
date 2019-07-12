@@ -13,7 +13,7 @@ class File extends Field
      */
     public $component = 'file-field';
 
-    public $disk;
+    public $disk = null;
 
     public $storagePath = '/';
 
@@ -35,7 +35,7 @@ class File extends Field
 
     public function meta()
     {
-        return array_merge([], $this->meta);
+        return array_merge(['disk' => $this->disk], $this->meta);
     }
 
     public function store(UploadedFile $file)
