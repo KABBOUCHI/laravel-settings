@@ -11,7 +11,9 @@ class GroupsController extends controller
     public function index(Request $request)
     {
         $groups = call_user_func(Settings::$fieldsCallback, $request);
-        $languages = call_user_func(Settings::$languages, $request);
+        $languages = call_user_func(Settings::$languages ?? function () {
+            return ["en" => "English"];
+        }, $request);
 
         return response([
             'groups'    => $groups,
