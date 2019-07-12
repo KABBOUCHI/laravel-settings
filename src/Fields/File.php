@@ -17,8 +17,6 @@ class File extends Field
 
     public $storagePath = '/';
 
-    protected $translatable = false;
-
     public function disk($disk)
     {
         $this->disk = $disk;

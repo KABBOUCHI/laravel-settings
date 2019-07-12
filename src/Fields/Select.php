@@ -11,8 +11,6 @@ class Select extends Field
      */
     public $component = 'select-field';
 
-    protected $translatable = false;
-
     public function options(array $options)
     {
         $this->withMeta([

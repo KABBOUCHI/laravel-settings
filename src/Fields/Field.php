@@ -48,7 +48,7 @@ abstract class Field extends Element
     /**
      * @var bool
      */
-    protected $translatable = true;
+    protected $translatable = false;
 
     /**
      * Create a new field.

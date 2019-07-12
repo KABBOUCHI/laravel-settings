@@ -11,8 +11,6 @@ class MultiSelect extends Field
      */
     public $component = 'multi-select-field';
 
-    protected $translatable = false;
-
     public function options(array $options)
     {
         $this->withMeta([
