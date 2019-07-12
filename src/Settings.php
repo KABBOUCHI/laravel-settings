@@ -80,6 +80,7 @@ class Settings extends Facade
             ->flatMap(function (Group $group) {
                 return  collect(call_user_func($group->fields(), request()))->map(function (Field $field) use ($group) {
                     $field->setPanel($group);
+
                     return $field;
                 });
             })
