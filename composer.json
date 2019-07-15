@@ -29,7 +29,7 @@
             "KABBOUCHI\\Settings\\Tests\\": "tests"
         },
         "files": [
-            "src/helpers.php"
+            "./src/helpers.php"
         ]
     },
     "scripts": {
