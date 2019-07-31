@@ -22,7 +22,7 @@ class Settings extends Facade
     public static function all()
     {
         if ($cacheDuration = config('laravel-settings.cache')) {
-            return cache()->remember("laravel-settings", $cacheDuration, function(){
+            return cache()->remember('laravel-settings', $cacheDuration, function () {
                 return Setting::all();
             });
         }
