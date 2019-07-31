@@ -1,4 +1,4 @@
-# [WIP] Advanced Settings Manager for Laravel
+# Advanced Settings Manager for Laravel
 
 ## Installation
 
