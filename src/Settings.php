@@ -19,10 +19,21 @@ class Settings extends Facade
         static::$fieldsCallback = $fieldsCallback;
     }
 
+    public static function all()
+    {
+        if ($cacheDuration = config('laravel-settings.cache')) {
+            return cache()->remember("laravel-settings", $cacheDuration, function(){
+                return Setting::all();
+            });
+        }
+
+        return Setting::all();
+    }
+
     public static function get(string $key)
     {
         /** @var Setting $setting */
-        $setting = Setting::where('full_key', $key)->first();
+        $setting = self::all()->whereFirst('full_key', $key);
 
         return optional($setting)->value;
     }
@@ -30,11 +41,13 @@ class Settings extends Facade
     public static function set(string $key, $value)
     {
         /** @var Setting $setting */
-        $setting = Setting::where('full_key', $key)->first();
+        $setting = Setting::all()->whereFirst('full_key', $key);
 
         if ($setting) {
             $setting->update(['value' => $value]);
         }
+
+        cache()->forgot('laravel-settings');
 
         return optional($setting)->value;
     }
