@@ -42,6 +42,10 @@ class SettingsController extends controller
 
         $data['meta'] = array_merge($data['meta'] ?? [], $field->meta);
 
-        return tap($setting)->update($data);
+        $setting->update($data);
+
+        cache()->forget('laravel-settings');
+
+        return $setting;
     }
 }
