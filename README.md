@@ -8,7 +8,41 @@ You can install the package via composer:
 composer require kabbouchi/laravel-settings
 ```
 
-## Usage
+Publish its assets:
+
+```bash
+php artisan vendor:publish --tag=laravel-settings-components
+php artisan vendor:publish --tag=laravel-settings-migrations
+```
+
+Register the vue component:
+
+```diff
+require('./bootstrap');
+
+window.Vue = require('vue');
+
++import SettingsManager from './components/laravel-settings/SettingsManager.vue';
+
++Vue.component('settings-manager', SettingsManager);
+
+const app = new Vue({
+    el: '#app'
+});
+```
+Add the `settings-manager` in your blade file
+
+```php
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <settings-manager></settings-manager>
+</div>
+@endsection
+
+```
+## Usage (in AppServiceProvider)
 
 ``` php
 Settings::auth(function () {
