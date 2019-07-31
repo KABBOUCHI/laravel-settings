@@ -58,14 +58,14 @@ Settings::fields(function (Request $request) {
         Group::make('General', function () {
             return [
                 Text::make('Site Name')
+                    ->setTranslatable(true)
                     ->help('lorem ipsum....'),
-                TextArea::make('Site Description'),
+                TextArea::make('Site Description')->setTranslatable(true),
             ];
         }),
         Group::make('Contact Us', function () {
             return [
                 Text::make('Phone Number', 'phone')
-                    ->setTranslatable(false)
             ];
         })->setKey('contact-us')
     ];
