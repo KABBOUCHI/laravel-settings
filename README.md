@@ -5,7 +5,7 @@
 You can install the package via composer:
 
 ```bash
-composer require kabbouchi/laravel-settings:dev-master
+composer require kabbouchi/laravel-settings
 ```
 
 ## Usage
